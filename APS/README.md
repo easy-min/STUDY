@@ -255,11 +255,6 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
 ---
 
-필요하면 **백준 실전 문제** 추천해줄까?  
-아니면 **우선순위 큐 예제 코드** 만들어줄까?  
-바로 알려줘, 언제든 갈게 🔥🔥
----
-
 ## ✅ **부분집합 / 조합 / 순열 핵심 패턴**
 
 ### ⭐ 부분집합 (Power Set)
