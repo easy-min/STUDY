@@ -104,6 +104,52 @@ public class 그래프_02_인접리스트 {
 - 메모리 O(V + E)
 
 ### 3) **간선 배열 (Edge Array)**
+```
+public class 그래프_03_간선배열 {
+	static class Edge {	// 문제 안에 class를 정의하는 경우게 왕왕 나온다.
+		int A, B, W; //시작,끝,가중치
+		public Edge(int a, int b, int w) {
+			super();
+			A = a;
+			B = b;
+			W = w;
+		}
+		@Override
+		public String toString() {
+			return "Edge [A=" + A + ", B=" + B + ", W=" + W + "]";
+		}
+	}	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		//V,E의 개수를 입력받음
+		int V = sc.nextInt(); // 정점의 개수 (0번 시작인지, 1번 시작인지 확인)
+		int E = sc.nextInt(); // 간선의 개수
+		Edge[] edges = new Edge[E]; // 간선의 배열 (객체 배열)
+		for (int i = 0; i<E; i++) {
+			int A = sc.nextInt(); //연결된 두 개의 정점의 정보
+			int B = sc.nextInt(); 
+			int W = sc.nextInt(); //가중치값 : 없다면 1을 저장하시오
+			edges[i] = new Edge(A,B,W); //유향이든 무향이든 알 필요는 없음(인지는 할 것)
+		}
+		/////////////////////////////////////////////////////////
+		List<Edge> edges2 = new ArrayList<>();
+		for (int i = 0; i<E; i++) {
+			edges2.add(new Edge(sc.nextInt(), sc.nextInt(), sc.nextInt()));
+		}
+		/////////////////////////////////////////////////////////
+		//2차원배열을 이용하여 저장하자 -> 간선의 정보가 전부 정수일 때..
+		int[][] edges3 = new int[E][3]; // [0]시작정점 [1]끝정점 [2]가중치
+		for (int i = 0; i<E; i++) {
+			int A = sc.nextInt();
+			int B = sc.nextInt();
+			int W = sc.nextInt();
+			edges3[i][0] = A;
+			edges3[i][1] = B;
+			edges3[i][2] = W;
+		}
+	}//main
+}
+```
 
 - 간선을 목록 형태로 관리 (start, end) 값 저장
 - 가중치를 포함할 경우 (start, end, weight)
