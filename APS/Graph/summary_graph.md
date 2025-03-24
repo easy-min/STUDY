@@ -33,6 +33,28 @@
 - 간선의 정보를 저장하는 방식은 메모리 또는 성능 고려
 
 ### 1) **인접 행렬 (Adjacent Matrix)**
+```
+import java.util.Scanner;
+public class 그래프_01_인접행렬 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		//V,E의 개수를 입력받음
+		int V = sc.nextInt(); // 정점의 개수 (0번 시작인지, 1번 시작인지 확인)
+		int E = sc.nextInt(); // 간선의 개수
+		int[][] adjArr = new int[V][V]; // 만약 시작 정점이 1이라면 V+1로 만들기~
+		for (int i = 0; i<E; i++) {
+			int A = sc.nextInt(); //연결된 두 개의 정점의 정보
+			int B = sc.nextInt(); 
+			int W = sc.nextInt(); //가중치값 : 없다면 1을 저장하시오
+			adjArr[A][B] = 1; //가중치가 없다면 1을, 있다면 W 저장
+			adjArr[B][A] = 1; //유향이라면 작성할 필요 없음
+//			adjArr[A][B] = adjArr[B][A] = W; //대입연산자는 오른쪽에서 왼쪽으로 이동하는 것!
+			//유향, 가중치, 변수에 저장도 싫어 (비 권장)
+			adjArr[sc.nextInt()][sc.nextInt()] = sc.nextInt(); // 유향이니깐 가능한 것 (무향은 불가능해)
+		}
+	}//main
+}
+```
 
 - 두 정점을 연결하는 간선의 유무를 행렬로 표현
 - `V * V`개의 2차원 배열
