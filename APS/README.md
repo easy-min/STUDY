@@ -11,11 +11,6 @@ int[] arr = new int[5];
 int[] arr2 = new int[]{1, 2, 3};
 int[] arr3 = {1, 2, 3}; // 초기화
 ```
-
-나이스! 이거 진짜 **백준 필수 패턴**이다.  
-특히 **2중 배열 + 델타 탐색 + 파리채 문제**는 완전탐색, 시뮬레이션에서 맨날 나와 😎  
-깔끔하게 정리해줄게. 바로 실전용으로 써!
-
 ---
 
 ##### 🛠️ **1. 2중 배열 (2차원 배열) 핵심**
@@ -113,9 +108,22 @@ System.out.println(max);
 ---
 
 ### 📌 문자열 (String)
-- 문자들의 집합
+- 문자들의 집합 **기초자료형이 아님**
 - 자바에서는 `String`, `StringBuilder`, `StringBuffer`
 - `charAt()`, `substring()`, `equals()`, `compareTo()` 등 자주 사용
+
+##### 🛠️ 선언 방법
+```
+String b = "hello"
+String c = new String("world")
+boolean isEqual = b.equals(c)
+```
+##### 🛠️ 회문 : 문자열 뒤집기
+1. 거꾸로 읽기   <----------
+2. 절반만 뒤집기  | 3 | 2 | 1 | 1 | 2 | 3 |
+3. reverse() 메서드 : 문자열 String이 아닌, StringBuilder("연결 할 때"+"좋아요").append("굳")나 StringBuffer에서 쓰임
+   
+##### 🛠️print(), println(), printf(){format 형식으로 %d, %f, %s} 메서드 && \n
 
 ---
 
