@@ -111,7 +111,9 @@ stack.peek();
 2. 시스템 스택
 3. 뒤로/앞으로 가기
 4. 계산기 (중위 -> 후위)
-5. 재귀함수 (표현 방식) -> 시스템 스택 ? 상태공간 트리 
+5. 재귀함수 (표현 방식) -> 시스템 스택 ? 상태공간 트리
+   a. 엄연히 말하면 나 자신을 호출하는 것이 아니라 나의 도플갱어를 호출
+   b. 탈출 조건, 표현식
 ---
 
 ### 📌 큐 (Queue) - FIFO
@@ -122,7 +124,15 @@ queue.poll();
 queue.peek();
 ```
 - 활용: BFS, 탐색 문제
-
+##### 🛠️ 구현 방법
+1. 배열(1차원) | top | 2 | 3 |
+2. 연결리스트  | top | -> | 2 | -> | 3 |
+3. Queue 인터페이스 (구현체로 LinkedList<>() 또는 ArrayDeque를 사용)
+##### 🛠️ 주요메서드 : enqueue(), dequeue(), offer(), poll(), peek()
+##### 🛠️ 종류
+1. 선형큐 : 잘못된 포화 인식 문제 (해결 방식 : 앞으로 밀착! 시간이 오래 걸림)
+2. 원형큐 : %사용. 한 칸 정도는 비워두는 게 계산하기 좋음
+3. 우선순위 큐 : 
 ---
 
 ### 📌 연결 리스트 (LinkedList)
@@ -133,6 +143,7 @@ list.removeFirst();
 list.get(0);
 ```
 - 활용: 삽입·삭제 많은 문제
+##### 🛠️노드 (데이터 | 링크)
 
 ---
 
@@ -140,7 +151,13 @@ list.get(0);
 - 이진 트리, 이진 탐색 트리 (BST), 힙 등
 - 순회 방식: 전위, 중위, 후위
 - 활용: DFS/BFS, 탐색 문제
-
+##### 🛠️구현
+1. 배열 |0번은 안 씀 | 1 | 2 | 3 | ... |   (*2 : 왼쪽 자식 // *2+1 : 오른쪽 자식)
+2. 연결 리스트
+##### 🛠️이진트리 탐색 (포화이진, 정이진, 완전 이진, 편향 이진 트리)
+1. 전위 (VLR)
+2. 중위 (LVR)
+3. 후위 (LRV)
 ---
 
 ### 📌 힙 (Heap) → 우선순위 큐로 활용
@@ -150,7 +167,97 @@ pq.offer(1);
 pq.poll();
 ```
 - 활용: 최소/최대값 찾기, 다익스트라
+##### 🛠️완전 이진트리
+1. pop : 루트만 꺼냄
+2. push : logN
 
+##### 🛠️priorityQueue
+1. Integer, Character ..
+2. 직접 비교 기준을 해야 할 수도 있음
+좋아! **🛠️ PriorityQueue 핵심 정리 + 마무리** 들어간다 😎🔥
+
+---
+
+## ✅ **🛠️ PriorityQueue (우선순위 큐)**
+- **기본 구조:** 최소 힙 (작은 값부터 먼저 나옴)
+- **자료형:** `Integer`, `Character`, `String`, 사용자 정의 클래스까지 가능
+- **시간복잡도:** 삽입 O(log N), 삭제 O(log N)
+
+---
+
+## ✅ **1️⃣ 기본 사용 - Integer, Character 등**
+```java
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+pq.offer(5);
+pq.offer(2);
+pq.offer(8);
+System.out.println(pq.poll()); // 2 (가장 작은 값부터 꺼냄)
+```
+- 기본형일 경우 오름차순(작은 값 우선)
+
+---
+
+## ✅ **2️⃣ 사용자 정의 객체 → 직접 비교 기준 세워야 함 (Comparator)**
+### ✔️ 방법 1: 익명 클래스 Comparator 사용
+```java
+PriorityQueue<Node> pq = new PriorityQueue<>(new Comparator<Node>() {
+    @Override
+    public int compare(Node o1, Node o2) {
+        return o1.weight - o2.weight;  // weight 기준 오름차순
+    }
+});
+```
+
+### ✔️ 방법 2: 람다식
+```java
+PriorityQueue<Node> pq = new PriorityQueue<>((o1, o2) -> o1.weight - o2.weight);
+```
+
+### ✔️ 방법 3: Comparable 인터페이스 구현
+```java
+class Node implements Comparable<Node> {
+    int index;
+    int weight;
+
+    Node(int index, int weight) {
+        this.index = index;
+        this.weight = weight;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return this.weight - o.weight; // weight 오름차순
+    }
+}
+```
+
+---
+
+## ✅ **3️⃣ 우선순위 뒤집기 (내림차순 만들기)**
+```java
+PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+```
+
+---
+
+## ✅ **💎 우선순위 큐 사용처 (실전 문제 패턴)**
+| 패턴               | 사용 예시                                  | 대표 백준 문제 |
+|--------------------|-------------------------------------------|----------------|
+| 최소 비용 처리         | 다익스트라, Prim 알고리즘                    | 1753 최단경로 |
+| 높은 우선순위 먼저 처리 | 고객센터, 작업 스케줄링                       | 11286 절댓값 힙 |
+| 커스텀 정렬 필요       | 객체 속성 기준 정렬                           | 7662 이중 우선순위 큐 |
+---
+
+## ✅ **마무리 한 줄 정리**
+👉 기본형은 그냥 쓰면 오름차순  
+👉 객체는 `Comparator`나 `Comparable` 필수  
+👉 내림차순은 `Collections.reverseOrder()` or `-값 비교`
+
+---
+
+필요하면 **백준 실전 문제** 추천해줄까?  
+아니면 **우선순위 큐 예제 코드** 만들어줄까?  
+바로 알려줘, 언제든 갈게 🔥🔥
 ---
 
 ## ✅ **부분집합 / 조합 / 순열 핵심 패턴**
